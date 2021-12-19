@@ -11,7 +11,7 @@ const SortableTest = observer(() => {
       <div>
         <h1>Sortable Test</h1>
         <button onClick={() => store.addItem()}>추가</button>
-        <button onClick={() => store.submit()}>제출</button>
+        <button disabled={store.isNotSubmittable} onClick={() => store.submit()}>제출</button>
       </div>
       <div>
         {store.items.map((item, index) => (
@@ -21,10 +21,9 @@ const SortableTest = observer(() => {
             onUp={() => store.up(index)}
             onDown={() => store.down(index)}
             onDelete={() => store.remove(item.id)}
-            isUpDisabled={store.isDisabled(index)}
-            isDownDisabled={store.isDisabled(index)}
+            isUpDisabled={store.isUpDisabled(index)}
+            isDownDisabled={store.isDownDisabled(index)}
             isDeletable={store.isDeletable}
-
           />)
         )}
       </div>

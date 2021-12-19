@@ -30,6 +30,10 @@ class SortableItemStore {
       input2: this.input2
     }
   }
+
+  get isSubmittable() {
+    return this.input1 && this.input2
+  }
 }
 
 export default SortableItemStore;

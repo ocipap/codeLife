@@ -6,7 +6,7 @@ class SortableStore {
   sendServerValue: string;
 
   constructor() {
-    this.items = [new SortableItemStore('', '')];
+    this.items = [];
     this.sendServerValue = ''
     makeAutoObservable(this);
   }
@@ -39,17 +39,30 @@ class SortableStore {
 
   }
 
-  isDisabled(index: number) {
-    return index === 0 || index === this.items.length - 1
+  remove(_id: string) {
+    this.items = this.items.filter(({ id }) => id !== _id)
+  }
+
+  isUpDisabled(index: number) {
+    return index === 0
+  }
+
+  isDownDisabled(index: number) {
+    return index === this.items.length - 1
+  }
+
+  get isSubmittable() {
+    return this.items.length && this.items.every(item => item.isSubmittable);
+  }
+
+  get isNotSubmittable() {
+    return !this.isSubmittable;
   }
 
   get isDeletable() {
     return this.items.length > 1
   }
 
-  remove(_id: string) {
-    this.items = this.items.filter(({ id }) => id !== _id)
-  }
 }
 
 export default SortableStore;
