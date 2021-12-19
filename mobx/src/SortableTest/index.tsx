@@ -12,7 +12,15 @@ const SortableTest = observer(() => {
         <button onClick={() => store.addItem()}>추가</button>
       </div>
       <div>
-        {store.items.map((item) => <SortableItem item={item}/>)}
+        {store.items.map((item, index) => <SortableItem
+          key={item.id}
+          item={item}
+          onUp={() => store.up(index)}
+          onDown={() => store.down(index)}
+          upDisabled={index === 0}
+          downDisabled={index === store.items.length - 1}
+          />
+        )}
       </div>
     </>
   );

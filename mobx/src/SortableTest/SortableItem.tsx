@@ -4,10 +4,15 @@ import SortableItemStore from "./SortableItemStore";
 
 type SortableItemProps = {
   item: SortableItemStore,
+  onUp: () => void,
+  onDown: () => void,
+  upDisabled: boolean,
+  downDisabled: boolean,
 }
 
-export const SortableItem: React.FC<SortableItemProps> = ({ item }) => {
+export const SortableItem: React.FC<SortableItemProps> = ({ item, onUp, onDown, upDisabled, downDisabled }) => {
   return <div>
+    <h3>{item.id}</h3>
     <div>
       <label htmlFor="input1">input1</label>
       <input id="input1" type="text" onChange={(event) => item.setInput1(event.target.value)}/>
@@ -19,8 +24,8 @@ export const SortableItem: React.FC<SortableItemProps> = ({ item }) => {
         type="text"
         onChange={(event) => item.setInput2(event.target.value)}/>
     </div>
-    <button>위로</button>
-    <button>아래로</button>
+    <button disabled={upDisabled} onClick={onUp}>위로</button>
+    <button disabled={downDisabled} onClick={onDown}>아래로</button>
   </div>
 }
 
