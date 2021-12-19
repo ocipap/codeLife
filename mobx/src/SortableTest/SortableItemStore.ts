@@ -22,6 +22,14 @@ class SortableItemStore {
   setInput2(value: string) {
     this.input2 = value;
   }
+
+  get value() {
+    return {
+      id: this.id,
+      input1: this.input1,
+      input2: this.input2
+    }
+  }
 }
 
 export default SortableItemStore;

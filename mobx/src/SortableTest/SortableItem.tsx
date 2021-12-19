@@ -6,11 +6,21 @@ type SortableItemProps = {
   item: SortableItemStore,
   onUp: () => void,
   onDown: () => void,
-  upDisabled: boolean,
-  downDisabled: boolean,
+  onDelete: () => void,
+  isUpDisabled: boolean,
+  isDownDisabled: boolean,
+  isDeletable: boolean,
 }
 
-export const SortableItem: React.FC<SortableItemProps> = ({ item, onUp, onDown, upDisabled, downDisabled }) => {
+export const SortableItem: React.FC<SortableItemProps> = ({
+  item,
+  onUp,
+  onDown,
+  onDelete,
+  isUpDisabled,
+  isDownDisabled,
+  isDeletable,
+}) => {
   return <div>
     <h3>{item.id}</h3>
     <div>
@@ -24,8 +34,9 @@ export const SortableItem: React.FC<SortableItemProps> = ({ item, onUp, onDown, 
         type="text"
         onChange={(event) => item.setInput2(event.target.value)}/>
     </div>
-    <button disabled={upDisabled} onClick={onUp}>위로</button>
-    <button disabled={downDisabled} onClick={onDown}>아래로</button>
+    <button disabled={isUpDisabled} onClick={onUp}>위로</button>
+    <button disabled={isDownDisabled} onClick={onDown}>아래로</button>
+    <button disabled={!isDeletable} onClick={onDelete}>삭제</button>
   </div>
 }
 

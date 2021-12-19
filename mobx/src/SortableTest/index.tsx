@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import { StoreProvider, useMobxStore } from "./useMobxStore";
 import SortableItem from "./SortableItem";
+import DisplayPanel from "./DisplayPanel";
 
 const SortableTest = observer(() => {
   const store = useMobxStore();
@@ -10,24 +11,30 @@ const SortableTest = observer(() => {
       <div>
         <h1>Sortable Test</h1>
         <button onClick={() => store.addItem()}>추가</button>
+        <button onClick={() => store.submit()}>제출</button>
       </div>
       <div>
-        {store.items.map((item, index) => <SortableItem
-          key={item.id}
-          item={item}
-          onUp={() => store.up(index)}
-          onDown={() => store.down(index)}
-          upDisabled={index === 0}
-          downDisabled={index === store.items.length - 1}
-          />
+        {store.items.map((item, index) => (
+          <SortableItem
+            key={item.id}
+            item={item}
+            onUp={() => store.up(index)}
+            onDown={() => store.down(index)}
+            onDelete={() => store.remove(item.id)}
+            isUpDisabled={store.isDisabled(index)}
+            isDownDisabled={store.isDisabled(index)}
+            isDeletable={store.isDeletable}
+
+          />)
         )}
       </div>
+      <DisplayPanel/>
     </>
   );
 });
 
 export default () => {
   return <StoreProvider>
-    <SortableTest />
+    <SortableTest/>
   </StoreProvider>
 };
