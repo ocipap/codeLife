@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import { v4 as uuid } from "uuid";
+import { makeAutoObservable } from 'mobx';
+import { v4 as uuid } from 'uuid';
 
 class SortableItemStore {
   id: string;
@@ -15,24 +15,24 @@ class SortableItemStore {
     this.input2 = input2;
   }
 
+  get value() {
+    return {
+      id: this.id,
+      input1: this.input1,
+      input2: this.input2,
+    };
+  }
+
+  get isSubmittable() {
+    return this.input1 && this.input2;
+  }
+
   setInput1(value: string) {
     this.input1 = value;
   }
 
   setInput2(value: string) {
     this.input2 = value;
-  }
-
-  get value() {
-    return {
-      id: this.id,
-      input1: this.input1,
-      input2: this.input2
-    }
-  }
-
-  get isSubmittable() {
-    return this.input1 && this.input2
   }
 }
 
