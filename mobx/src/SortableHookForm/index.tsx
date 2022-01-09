@@ -24,11 +24,12 @@ const SortableHookForm = observer(() => {
   const methods = useForm<FormValues>({
     mode: 'onChange',
   });
-  const { control, handleSubmit } = methods;
+  const { control, handleSubmit, formState } = methods;
   const { fields, remove, append, swap } = useFieldArray({
     name: 'sortable',
     control,
   });
+  const { isValid, isDirty } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
@@ -52,13 +53,19 @@ const SortableHookForm = observer(() => {
           control={control}
           name="name"
           field="이름"
-          rules={{ required: true }}
+          rules={{ required: 'Name is required' }}
         />
         <InputHookForm
           control={control}
           name="email"
           field="이메일"
-          rules={{ required: true }}
+          rules={{
+            required: 'Email is required',
+            pattern: {
+              value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+              message: 'Email is not valid.',
+            },
+          }}
         />
         <div>
           {fields.map((field, index) => {
@@ -80,7 +87,9 @@ const SortableHookForm = observer(() => {
         >
           추가하기
         </button>
-        <button type={'submit'}>제출</button>
+        <button type={'submit'} disabled={!isDirty || !isValid}>
+          제출
+        </button>
       </form>
     </FormProvider>
   );

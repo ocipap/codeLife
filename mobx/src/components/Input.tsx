@@ -10,12 +10,14 @@ type InputProps = {
 
 const Input: React.FC<InputProps> = React.forwardRef(
   ({ field, error, errorMessage, value, onChange }, ref) => {
+    const isError = error ? { border: '1px solid red' } : {};
+    const styleInput = { outline: 'none' };
     return (
       <div>
         <label htmlFor="">
           <div>{field}</div>
           <input
-            style={error ? { border: '1px solid red' } : {}}
+            style={{ ...styleInput, ...isError }}
             type="text"
             value={value || ''}
             onChange={onChange}

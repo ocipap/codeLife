@@ -30,13 +30,13 @@ export const SortableItem: React.FC<SortableItemProps> = ({
         control={control}
         name={`sortable.${index}.input1`}
         field={'Input1'}
-        rules={{ required: true }}
+        rules={{ required: 'Required' }}
       />
       <InputHookForm
         control={control}
         name={`sortable.${index}.input2`}
         field={'Input2'}
-        rules={{ required: true }}
+        rules={{ required: 'Required' }}
       />
       <button type={'button'} onClick={onUp}>
         위로
