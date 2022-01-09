@@ -2,7 +2,8 @@ import React from 'react';
 import SortableTest from './SortableTest';
 import './decorator';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import AwesomeForm from './AwesomeForm';
+import AwesomeMobxForm from './AwesomeMobxForm';
+import AwesomeHookForm from './AwesomeHookForm';
 
 function App() {
   return (
@@ -12,12 +13,17 @@ function App() {
           <Link to="/sortable">Sortable</Link>
         </li>
         <li>
-          <Link to="/form">Form</Link>
+          <Link to="/mobx-form">Mobx Form</Link>
+        </li>
+
+        <li>
+          <Link to="/hook-form">React Hook Form</Link>
         </li>
       </ul>
       <Routes>
         <Route path="/sortable" element={<SortableTest />} />
-        <Route path="/form" element={<AwesomeForm />} />
+        <Route path="/mobx-form" element={<AwesomeMobxForm />} />
+        <Route path="/hook-form" element={<AwesomeHookForm />} />
       </Routes>
     </BrowserRouter>
   );
