@@ -77,6 +77,8 @@ const SortableHookForm = observer(() => {
                 onUp={() => handleSwap(index, index - 1)}
                 onDown={() => handleSwap(index, index + 1)}
                 onDelete={() => remove(index)}
+                isUpDisabled={index <= 0}
+                isDownDisabled={index >= fields.length - 1}
               />
             );
           })}

@@ -12,6 +12,8 @@ type SortableItemProps = {
   onUp: () => void;
   onDown: () => void;
   onDelete: () => void;
+  isUpDisabled?: boolean;
+  isDownDisabled?: boolean;
 };
 
 export const SortableItem: React.FC<SortableItemProps> = ({
@@ -20,6 +22,8 @@ export const SortableItem: React.FC<SortableItemProps> = ({
   onUp,
   onDown,
   onDelete,
+  isUpDisabled,
+  isDownDisabled,
 }) => {
   const { control } = useFormContext();
 
@@ -38,10 +42,10 @@ export const SortableItem: React.FC<SortableItemProps> = ({
         field={'Input2'}
         rules={{ required: 'Required' }}
       />
-      <button type={'button'} onClick={onUp}>
+      <button type={'button'} onClick={onUp} disabled={isUpDisabled}>
         위로
       </button>
-      <button type={'button'} onClick={onDown}>
+      <button type={'button'} onClick={onDown} disabled={isDownDisabled}>
         아래로
       </button>
       <button type={'button'} onClick={onDelete}>
